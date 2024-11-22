@@ -5,12 +5,12 @@ const ShopByCategory = () => {
     {
       id: 1,
       name: "Bracelets",
-      image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/jewellery-set/c/q/8/na-na-1-cbniti-deora-jewellery-original-imah35phy7dqddhu.jpeg?q=20&crop=false",
+      image: "p1.png",
     },
     {
       id: 2,
       name: "Chains",
-      image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/jewellery-set/c/q/8/na-na-1-cbniti-deora-jewellery-original-imah35phy7dqddhu.jpeg?q=20&crop=false",
+      image: "p2.png",
       badge: [
         { text: "Gold", emoji: "⭐" },
         { text: "Platinum", emoji: "❄️" },
@@ -19,22 +19,22 @@ const ShopByCategory = () => {
     {
       id: 3,
       name: "Earrings",
-      image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/jewellery-set/c/q/8/na-na-1-cbniti-deora-jewellery-original-imah35phy7dqddhu.jpeg?q=20&crop=false",
+      image: "p3.png",
     },
     {
       id: 4,
       name: "Neckwears",
-      image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/jewellery-set/c/q/8/na-na-1-cbniti-deora-jewellery-original-imah35phy7dqddhu.jpeg?q=20&crop=false",
+      image: "p1.png",
     },
     {
       id: 5,
       name: "Pendants",
-      image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/jewellery-set/c/q/8/na-na-1-cbniti-deora-jewellery-original-imah35phy7dqddhu.jpeg?q=20&crop=false",
+      image: "p2.png",
     },
     {
       id: 6,
       name: "Rings",
-      image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/jewellery-set/c/q/8/na-na-1-cbniti-deora-jewellery-original-imah35phy7dqddhu.jpeg?q=20&crop=false",
+      image: "p3.png",
     },
   ];
 

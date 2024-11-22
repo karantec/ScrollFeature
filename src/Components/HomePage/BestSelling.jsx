@@ -3,7 +3,7 @@ import React from "react";
 const products = [
   {
     id: 1,
-    image: "https://www.dazzlesjewellery.in/cdn/shop/files/IMG_9798_0af72cbf-a031-4900-8c47-96cfa781b91d.jpg?v=1720172694",
+    image: "p1.png",
     title: "Diamond Cristial Stud",
     price: "₹3,000",
     originalPrice: "₹5,000",
@@ -12,7 +12,7 @@ const products = [
   },
   {
     id: 2,
-    image: "https://www.dazzlesjewellery.in/cdn/shop/files/IMG_9798_0af72cbf-a031-4900-8c47-96cfa781b91d.jpg?v=1720172694",
+    image: "p2.png",
     title: "Diamond Cristial Stud",
     price: "₹3,000",
     originalPrice: "₹5,000",
@@ -21,7 +21,7 @@ const products = [
   },
   {
     id: 3,
-    image: "https://www.dazzlesjewellery.in/cdn/shop/files/IMG_9798_0af72cbf-a031-4900-8c47-96cfa781b91d.jpg?v=1720172694",
+    image: "p3.png",
     title: "Diamond Cristial Stud",
     price: "₹3,000",
     originalPrice: "₹5,000",
@@ -30,7 +30,7 @@ const products = [
   },
   {
     id: 4,
-    image: "https://www.dazzlesjewellery.in/cdn/shop/files/IMG_9798_0af72cbf-a031-4900-8c47-96cfa781b91d.jpg?v=1720172694",
+    image: "p1.png",
     title: "Diamond Cristial Stud",
     price: "₹3,000",
     originalPrice: "₹5,000",

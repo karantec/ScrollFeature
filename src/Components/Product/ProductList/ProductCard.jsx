@@ -1,14 +1,14 @@
 import React from 'react';
 
 const products = [
-  { image: 'https://www.jewelegance.com/cdn/shop/products/JG-2204-06123.jpg?v=1675567825', title: 'Gold Pendant', price: 15000, originalPrice: 20000, discount: 25, isNew: true, category: 'Gold' },
-  { image: 'https://www.jewelegance.com/cdn/shop/products/JG-2204-06123.jpg?v=1675567825', title: 'Gold Earrings', price: 12000, originalPrice: 16000, discount: 20, category: 'Gold' },
-  { image: 'https://www.jewelegance.com/cdn/shop/products/JG-2204-06123.jpg?v=1675567825', title: 'Gold Necklace', price: 50000, originalPrice: 70000, discount: 30, isNew: true, category: 'Gold' },
-  { image: 'https://www.jewelegance.com/cdn/shop/products/JG-2204-06123.jpg?v=1675567825', title: 'Diamond Crystal Stud', price: 3000, originalPrice: 6000, discount: 50, category: 'Diamond' },
-  { image: 'https://www.jewelegance.com/cdn/shop/products/JG-2204-06123.jpg?v=1675567825', title: 'Platinum Ring', price: 25000, originalPrice: 30000, discount: 15, category: 'Platinum' },
-  { image: 'https://www.jewelegance.com/cdn/shop/products/JG-2204-06123.jpg?v=1675567825', title: 'Silver Bracelet', price: 5000, originalPrice: 7000, discount: 20, category: 'Silver' },
-  { image: 'https://www.jewelegance.com/cdn/shop/products/JG-2204-06123.jpg?v=1675567825', title: 'Platinum Necklace', price: 80000, originalPrice: 100000, discount: 20, category: 'Platinum' },
-  { image: 'https://www.jewelegance.com/cdn/shop/products/JG-2204-06123.jpg?v=1675567825', title: 'Gold Ring', price: 18000, originalPrice: 25000, discount: 28, category: 'Gold' },
+  { image: 'p1.png', title: 'Gold Pendant', price: 15000, originalPrice: 20000, discount: 25, isNew: true, category: 'Gold' },
+  { image: 'p2.png', title: 'Gold Earrings', price: 12000, originalPrice: 16000, discount: 20, category: 'Gold' },
+  { image: 'p3.png', title: 'Gold Necklace', price: 50000, originalPrice: 70000, discount: 30, isNew: true, category: 'Gold' },
+  { image: 'p1.png', title: 'Diamond Crystal Stud', price: 3000, originalPrice: 6000, discount: 50, category: 'Diamond' },
+  { image: 'p2.png', title: 'Platinum Ring', price: 25000, originalPrice: 30000, discount: 15, category: 'Platinum' },
+  { image: 'p3.png', title: 'Silver Bracelet', price: 5000, originalPrice: 7000, discount: 20, category: 'Silver' },
+  { image: 'p1.png', title: 'Platinum Necklace', price: 80000, originalPrice: 100000, discount: 20, category: 'Platinum' },
+  { image: 'p3.png', title: 'Gold Ring', price: 18000, originalPrice: 25000, discount: 28, category: 'Gold' },
 ];
 
 const ProductCatalog = () => {

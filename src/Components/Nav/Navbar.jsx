@@ -12,8 +12,12 @@ const Navbar = () => {
     { name: "About", path: "/about" },
     { name: "Product", path: "/productlist" },
     { name: "Cart", path: "/cart" },
+    { name: "Checkout", path: "/checkout" },
+   
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },
+    { name: "Login", path: "/login" },
+    { name: "Signup", path: "/signup" },
   ];
 
   // Function to handle link clicks

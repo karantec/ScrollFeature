@@ -5,7 +5,7 @@ const EverydayElegance = () => {
     {
       id: 1,
       name: "Diamond Crystal Stud",
-      image: "https://www.jewelegance.com/cdn/shop/products/JG-2204-06123.jpg?v=1675567825", // Add actual image URL
+      image: "p1.png", // Add actual image URL
       price: "₹3,000",
       originalPrice: "₹5,000",
       discount: "50% OFF",
@@ -14,7 +14,7 @@ const EverydayElegance = () => {
     {
       id: 2,
       name: "Diamond Crystal Stud",
-      image: "https://www.jewelegance.com/cdn/shop/products/JG-2204-06123.jpg?v=1675567825", // Add actual image URL
+      image: "p2.png", // Add actual image URL
       price: "₹3,000",
       originalPrice: "₹5,000",
       discount: "50% OFF",
@@ -22,7 +22,7 @@ const EverydayElegance = () => {
     {
       id: 3,
       name: "Diamond Crystal Stud",
-      image: "https://www.jewelegance.com/cdn/shop/products/JG-2204-06123.jpg?v=1675567825", // Add actual image URL
+      image: "p3.png", // Add actual image URL
       price: "₹3,000",
       originalPrice: "₹5,000",
       discount: "50% OFF",
@@ -30,7 +30,7 @@ const EverydayElegance = () => {
     {
       id: 4,
       name: "Diamond Crystal Stud",
-      image: "https://www.jewelegance.com/cdn/shop/products/JG-2204-06123.jpg?v=1675567825", // Add actual image URL
+      image: "p1.png", // Add actual image URL
       price: "₹3,000",
       originalPrice: "₹5,000",
       discount: "50% OFF",
