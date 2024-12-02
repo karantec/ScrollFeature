@@ -11,8 +11,8 @@ const Navbar = () => {
     { name: "What's New", path: "/" },
     { name: "About", path: "/about" },
     { name: "Product", path: "/productlist" },
-    { name: "Cart", path: "/cart" },
-    { name: "Checkout", path: "/checkout" },
+    { name: "Cart", path: "/carts" },
+    // { name: "Checkout", path: "/checkout" },
    
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },

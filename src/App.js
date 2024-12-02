@@ -14,6 +14,8 @@ import NotFound from "./NotFound"
 import ProductPage from "./Components/Product/ProductList/ProductPage"
 import  Signup from "./Components/SignUp/Signup"
 import Login from "./Components/SignUp/Login"
+import TabSwitcher from "./Components/Order/TabSwich"
+
 
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
         <Route path="/confirm" element={<Final/>}/>
         <Route path="/products" element={<ProductLayout/>}/>
         <Route path="/productlist" element={<ProductPage/>}/>
+        <Route path="/carts" element={<TabSwitcher/>}/>
         <Route path="*" element={<NotFound />} />
 
       </Routes>
