@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const OrderSummary = () => {
   const [paymentMethod, setPaymentMethod] = useState("cash-on-delivery");
@@ -115,12 +116,12 @@ const OrderSummary = () => {
       </div>
 
       {/* Place Order Button */}
-      <button
+     <Link to="/confirm"> <button
         type="button"
         className="mt-6 w-full py-3 text-center bg-orange-600 text-white font-bold text-sm rounded-md hover:bg-orange-500 transition"
       >
         PLACE ORDER
-      </button>
+      </button></Link> 
     </div>
   );
 };
