@@ -1,47 +1,63 @@
-import { Routes, Route } from "react-router-dom"
-import Home from "./Components/HomePage/Home"
-import Cont from "./Components/Contact/Cont"
-import Navbar from "./Components/Nav/Navbar"
-import Footer from "./Components/Footer/Footer"
-import About from "./Components/AboutPage/About"
-import Blog from "./Components/Blogs/blog"
-import ShoppingCart from "./Components/Order/Cart"
-import SecureCheckout from "./Components/Order/Summar"
-import Final from "./Components/Order/Final"
-import ProductDetail from "./Components/Product/Product"
-import ProductLayout from "./Components/Product/ProductLayout"
-import NotFound from "./NotFound"
-import ProductPage from "./Components/Product/ProductList/ProductPage"
-import  Signup from "./Components/SignUp/Signup"
-import Login from "./Components/SignUp/Login"
-import TabSwitcher from "./Components/Order/TabSwich"
+import React, { useState, useRef } from "react";
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
+import EmailList from "./components/EmailList";
+import EmailContent from "./components/EmailContent";
 
+const App = () => {
+  const [selectedEmail, setSelectedEmail] = useState(null);
+  const [emailListWidth, setEmailListWidth] = useState(400); // Default width of Email List
+  const isResizing = useRef(false);
 
-function App() {
+  // Mouse Down Event (Start Resizing)
+  const handleMouseDown = () => {
+    isResizing.current = true;
+  };
+
+  // Mouse Move Event (Resize the middle panel)
+  const handleMouseMove = (e) => {
+    if (!isResizing.current) return;
+    const newWidth = e.clientX - 250; // Sidebar is 250px fixed
+    if (newWidth >= 300 && newWidth <= window.innerWidth - 300) { 
+      setEmailListWidth(newWidth);
+    }
+  };
+
+  // Mouse Up Event (Stop Resizing)
+  const handleMouseUp = () => {
+    isResizing.current = false;
+  };
+
+  // Attach Listeners
+  React.useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
   return (
-    <div className="App">
-      
-    <Navbar/>
-    
-      <Routes>
-        <Route path="/" element={ <Home/> } />
-        <Route path="/signup" element={<Signup/>}/>
-         <Route path="/login" element={<Login/>}/>
-        <Route path="/about" element={<About/>} />
-        <Route path="/contact" element={ <Cont/> } />
-        <Route path="/blog" element={ <Blog/> } />
-        <Route path="/cart" element={<ShoppingCart/> } />
-        <Route path="/checkout" element={<SecureCheckout/> } />
-        <Route path="/confirm" element={<Final/>}/>
-        <Route path="/products" element={<ProductLayout/>}/>
-        <Route path="/productlist" element={<ProductPage/>}/>
-        <Route path="/carts" element={<TabSwitcher/>}/>
-        <Route path="*" element={<NotFound />} />
+    <div className="flex h-screen">
+      <Sidebar />
 
-      </Routes>
-      <Footer/>
+      {/* Email List (Resizable) */}
+      <div className="relative bg-gray-100 shadow-md" style={{ width: `${emailListWidth}px` }}>
+        <EmailList onSelectEmail={setSelectedEmail} selectedEmailId={selectedEmail?.id} />
+        {/* Drag Handle */}
+        <div
+          className="absolute top-0 right-0 w-2 h-full cursor-ew-resize bg-gray-300 hover:bg-gray-500 transition"
+          onMouseDown={handleMouseDown}
+        />
+      </div>
+
+      {/* Email Content (Dynamic Width) */}
+      <div className="flex-1 bg-white shadow-md">
+        <EmailContent email={selectedEmail} />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
