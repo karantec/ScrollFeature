@@ -1,81 +1,111 @@
-// components/EmailList.jsx
-import React, { useRef } from 'react';
-import { ScrollArea } from './ui/scroll-area';
-import { Button } from './ui/button'; // Import your button component
+import React, { useEffect, useState, useRef } from "react";
+import { ScrollArea } from "./ui/scroll-area";
+import { ToggleGroup, ToggleGroupItem } from "./ui/ToggleGroup";
 
 const EmailList = ({ onSelectEmail, selectedEmailId }) => {
-  const emails = [
-    {
-      id: 1,
-      sender: 'William Smith',
-      to: 'me@example.com',
-      subject: 'Meeting Tomorrow',
-      preview: "Hi, let's have a meeting tomorrow to discuss the project...",
-      time: 'Oct 22, 2023, 9:00:00 AM',
-      tags: ['work'],
-      content: "Hi, let's have a meeting tomorrow to discuss the project. I've been reviewing the project details and have some ideas I'd like to share. It's crucial that we align on our next steps to ensure the project's success. Please come prepared with any questions or insights you may have. Looking forward to our meeting! Best regards, William"
-    },
-    {
-      id: 2,
-      sender: 'David Lee',
-      to: 'me@example.com',
-      subject: 'New Project Ideas',
-      preview: 'I have an exciting new project idea to discuss with you...',
-      time: 'about 2 years ago',
-      tags: ['meeting', 'work', 'important'],
-      content: "I have an exciting new project idea to discuss with you. It involves expanding our services to target a niche market that has shown significant growth potential..."
-    },
-  
-      {
-        id: 2,
-        sender: 'David Lee',
-        to: 'me@example.com',
-        subject: 'New Project Ideas',
-        preview: 'I have an exciting new project idea to discuss with you...',
-        time: 'about 2 years ago',
-        tags: ['meeting', 'work', 'important'],
-        content: "I have an exciting new project idea to discuss with you. It involves expanding our services to target a niche market that has shown significant growth potential..."
-      },
-  ];
-
+  const [emails, setEmails] = useState([]);
+  const [filteredEmails, setFilteredEmails] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [filter, setFilter] = useState("all");
   const scrollRef = useRef(null);
 
-  // Function to scroll smoothly from top to bottom
-  
+  useEffect(() => {
+    const fetchEmails = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/mails/get");
+        if (!response.ok) {
+          throw new Error("Failed to fetch emails");
+        }
+        const data = await response.json();
+        setEmails(data);
+        setFilteredEmails(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEmails();
+  }, []);
+
+  useEffect(() => {
+    if (filter === "all") {
+      setFilteredEmails(emails);
+    } else if (filter === "unread") {
+      setFilteredEmails(emails.filter((email) => !email.read));
+    }
+  }, [filter, emails]);
+
+  // Toggle Read/Unread Status
+  const toggleReadStatus = async (emailId, currentStatus) => {
+    try {
+      const response = await fetch(`http://localhost:8000/mails/update/${emailId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ read: !currentStatus }), // Toggle read status
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update email status");
+      }
+
+      // Update local state after successful backend update
+      setEmails((prevEmails) =>
+        prevEmails.map((email) =>
+          email.id === emailId ? { ...email, read: !currentStatus } : email
+        )
+      );
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <div className="relative h-screen border-r flex flex-col">
-      {/* Scrollable Area */}
+      <div className="flex items-center gap-4 p-4 border-b">
+        <h2 className="text-lg font-semibold">Inbox</h2>
+        <ToggleGroup type="single" defaultValue="all">
+          <ToggleGroupItem value="all">All mail</ToggleGroupItem>
+          <ToggleGroupItem value="unread">Unread</ToggleGroupItem>
+        </ToggleGroup>
+      </div>
+
       <ScrollArea ref={scrollRef} className="flex-1 overflow-y-auto p-4">
+        {loading && <p className="text-center">Loading emails...</p>}
+        {error && <p className="text-red-500 text-center">{error}</p>}
+        {!loading && !error && filteredEmails.length === 0 && (
+          <p className="text-center text-gray-500">No emails found.</p>
+        )}
+
         <div className="space-y-4 w-full">
-          {emails.map((email) => (
+          {filteredEmails.map((email) => (
             <div
               key={email.id}
-              className={`bg-white shadow-md p-4 rounded-lg cursor-pointer border ${
-                selectedEmailId === email.id ? 'border-primary bg-secondary/10' : 'hover:bg-secondary/10'
-              }`}
-              onClick={() => onSelectEmail(email)}
+              className={`p-4 rounded-lg cursor-pointer border shadow-md ${
+                email.read ? "bg-gray-100" : "bg-white"
+              } ${selectedEmailId === email.id ? "border-primary" : "hover:bg-secondary/10"}`}
+              onClick={() => {
+                toggleReadStatus(email.id, email.read);
+                onSelectEmail(email);
+              }}
             >
-              {/* Sender Avatar */}
               <div className="flex items-center space-x-4">
                 <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                   {email.sender.charAt(0)}
                 </div>
                 <div className="flex-1 min-w-0">
-                  {/* Sender & Time */}
                   <div className="flex justify-between items-center">
                     <h4 className="text-sm font-medium truncate">{email.sender}</h4>
-                    <span className="text-xs text-muted-foreground whitespace-nowrap">
-                      {email.time}
-                    </span>
+                    <span className="text-xs text-muted-foreground whitespace-nowrap">{email.time}</span>
                   </div>
-
-                  {/* Subject & Preview */}
-                  <p className="text-sm font-medium truncate">{email.subject}</p>
+                  <p className={`text-sm font-medium truncate ${email.read ? "text-gray-500" : "text-black"}`}>
+                    {email.subject}
+                  </p>
                   <p className="text-sm text-muted-foreground truncate">{email.preview}</p>
-
-                  {/* Tags */}
                   <div className="flex gap-2 mt-2 flex-wrap">
-                    {email.tags.map((tag) => (
+                    {email.tags?.map((tag) => (
                       <span key={tag} className="text-xs bg-secondary px-2 py-1 rounded">
                         {tag}
                       </span>
@@ -87,9 +117,6 @@ const EmailList = ({ onSelectEmail, selectedEmailId }) => {
           ))}
         </div>
       </ScrollArea>
-
-      {/* Scroll to Bottom Button */}
-      
     </div>
   );
 };
