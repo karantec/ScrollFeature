@@ -13,7 +13,7 @@ const EmailList = ({ onSelectEmail, selectedEmailId }) => {
   useEffect(() => {
     const fetchEmails = async () => {
       try {
-        const response = await fetch("http://localhost:8000/mails/get");
+        const response = await fetch("https://assignmentssde-1-2.onrender.com/mails/get");
         if (!response.ok) {
           throw new Error("Failed to fetch emails");
         }
@@ -41,7 +41,7 @@ const EmailList = ({ onSelectEmail, selectedEmailId }) => {
   // Toggle Read/Unread Status
   const toggleReadStatus = async (emailId, currentStatus) => {
     try {
-      const response = await fetch(`http://localhost:8000/mails/update/${emailId}`, {
+      const response = await fetch(`https://assignmentssde-1-2.onrender.com/mails/update/${emailId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ read: !currentStatus }), // Toggle read status

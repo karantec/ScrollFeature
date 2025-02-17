@@ -1,27 +1,29 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useAuth } from "../AuthContext";
 import { Card, CardContent } from "./ui/card";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 
 const SignIn = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { login } = useAuth();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     setLoading(true);
     setError("");
     try {
-      await login(formData);
+      await login(data);
+      alert("Login successful!");
     } catch (error) {
       setError(error.message);
+      alert("Login failed: " + error.message);
     }
     setLoading(false);
   };
@@ -30,7 +32,6 @@ const SignIn = () => {
     <div className="flex flex-col md:flex-row h-screen">
       {/* Left Panel */}
       <div className="w-full md:w-1/2 bg-black text-white flex flex-col justify-between p-10 text-center md:text-left relative">
-        {/* Background Image */}
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSvR4I9d0d2aYoIyywOqTGLGc-aRn8z2eqsA&s"
           alt="Background"
@@ -38,12 +39,10 @@ const SignIn = () => {
         />
         <div className="relative z-10">
           <div className="text-xl font-bold flex items-center justify-center md:justify-start gap-2">
-            
+            {/* Logo or Branding */}
           </div>
           <div className="text-sm italic mt-6">
-            
-            <br />
-            
+            {/* Additional Text */}
           </div>
         </div>
       </div>
@@ -57,23 +56,39 @@ const SignIn = () => {
               Enter your credentials to access your account
             </p>
             {error && <p className="text-red-500 text-center">{error}</p>}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                type="email"
-                name="email"
-                placeholder="johndoe@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <Input
-                type="password"
-                name="password"
-                placeholder="SecurePassword123"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <div>
+                <Input
+                  type="email"
+                  placeholder="johndoe@example.com"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Enter a valid email address",
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                )}
+              </div>
+              <div>
+                <Input
+                  type="password"
+                  placeholder="SecurePassword123"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
+                />
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+                )}
+              </div>
               <Button
                 type="submit"
                 className="w-full bg-black text-white"

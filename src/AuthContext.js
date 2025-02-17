@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   // Login function
   const login = async (formData) => {
     try {
-      const response = await fetch("http://localhost:8000/auth/login", {
+      const response = await fetch("https://assignmentssde-1-2.onrender.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
